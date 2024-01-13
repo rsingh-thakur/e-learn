@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:layout_margin="20dp"
+    tools:context=".UserSignUpActivity">
+
+
+
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:background="@drawable/phone_icon"
+        app:tint="@color/my_primary"
+
+        android:layout_marginBottom="20dp"
+        ></ImageView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Enter Mobile Number"
+        android:textSize="25dp"
+        android:textColor="#574D4D"
+        android:textStyle="bold"
+        android:layout_gravity="center_vertical"
+        />
+
+     <LinearLayout
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:orientation="horizontal">
+
+         <com.hbb20.CountryCodePicker
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             app:ccp_showFlag="false"
+             app:ccp_showNameCode="false"
+             android:id="@+id/countryCodeId">
+         </com.hbb20.CountryCodePicker>
+
+         <EditText
+             android:layout_width="match_parent"
+             android:layout_height="40dp"
+             android:hint="Enter number here "
+             android:padding="10dp"
+             android:inputType="phone"
+             android:layout_margin="10dp"
+             android:background="@drawable/edit_text_rounded"
+             android:elevation="10sp"
+             android:id="@+id/phoneId" />
+
+
+     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center_vertical"
+        android:gravity="center"
+        >
+
+
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:hint="Enter username"
+            android:padding="10dp"
+            android:inputType="text"
+            android:layout_margin="10dp"
+            android:background="@drawable/edit_text_rounded"
+            android:elevation="10sp"
+            android:id="@+id/usernameId" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:hint="Enter email address"
+            android:padding="10dp"
+            android:inputType="textEmailAddress"
+            android:layout_margin="10dp"
+            android:background="@drawable/edit_text_rounded"
+            android:elevation="10sp"
+            android:id="@+id/emailId" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:hint="Enter password"
+            android:padding="10dp"
+            android:inputType="textPassword"
+            android:layout_margin="10dp"
+            android:background="@drawable/edit_text_rounded"
+            android:elevation="10sp"
+            android:id="@+id/passwordId" />
+
+
+
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Sign Up"
+            android:textColor="@color/white"
+            android:layout_marginTop="20dp"
+            android:id="@+id/signUpButton"
+            >
+
+        </Button>
+        <ProgressBar
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:layout_marginBottom="50dp"
+            android:id="@+id/progressBarId">
+        </ProgressBar>
+    </LinearLayout>
+
+
+</LinearLayout>

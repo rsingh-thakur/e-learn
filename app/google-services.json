@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "138508037249",
+    "project_id": "e-learn-f1603",
+    "storage_bucket": "e-learn-f1603.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:138508037249:android:5dfd075cd5d5f3c8487180",
+        "android_client_info": {
+          "package_name": "com.nrt.e_learning"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCQLKxvEfGrtyOBQOTBqzMggLVwOxFvlp0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
