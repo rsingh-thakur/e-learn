@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <!-- Background color for the button -->
+        <shape android:shape="rectangle">
+            <solid android:color="@color/my_primary" />
+            <corners android:radius="10dp" />
+        </shape>
+    </item>
+    <item android:top="2dp">
+        <!-- Stroke for the button -->
+        <shape android:shape="rectangle">
+            <solid android:color="@android:color/transparent" />
+            <stroke
+                android:color="@color/black"
+            android:width="2dp" />
+            <corners android:radius="10dp" />
+        </shape>
+    </item>
+</layer-list>

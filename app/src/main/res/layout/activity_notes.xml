@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context=".NotesActivity">
+
+
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/my_primary"
+        android:title="Upload Notes"
+        app:titleTextAppearance="@style/TextAppearance.AppCompat.SearchResult.Title"
+        android:titleTextColor="@android:color/white"/>
+
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="15dp"
+        android:layout_marginTop="50dp"
+        android:orientation="vertical">
+
+
+    <EditText
+        android:id="@+id/editTextName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:hint="Enter PDF Name"
+        android:visibility="visible"
+        android:inputType="text" />
+
+    <EditText
+        android:id="@+id/editTextCategory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:visibility="visible"
+        android:hint="Enter PDF Category"
+        android:inputType="text" />
+
+
+    <Button
+        android:id="@+id/btnChoosePDF"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="choosePDF"
+        android:layout_marginBottom="10dp"
+        android:text="Choose PDF"
+        android:textColor="@color/white"
+        android:visibility="visible"
+     />
+
+    <Button
+        android:id="@+id/btnUpload"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="uploadPDF"
+        android:text="Upload PDF"
+        android:visibility="visible"
+        android:textColor="@color/white"/>
+    </LinearLayout>
+</LinearLayout>

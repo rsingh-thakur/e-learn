@@ -1,55 +1,138 @@
 package com.nrt.e_learning;
 
+import static com.nrt.e_learning.util.OTPManager.generateOTP;
+import static com.nrt.e_learning.util.OTPManager.saveOTP;
+
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
+import android.widget.Toast;
 
-import android.content.Intent;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.nrt.e_learning.util.AndroidUtil;
 
-import android.view.View;
+public class  SendOTPActivity extends AppCompatActivity {
 
-import com.nrt.e_learning.util.EmailSender;
-import com.nrt.e_learning.util.OTPManager;
+    private FirebaseAuth firebaseAuth;
+    String generatedOTP ;
+    EditText receiverEmail;
+    Button BtnSendEmail;
 
-public class SendOTPActivity extends AppCompatActivity {
 
-    private EditText emailEditText;
-    private Button sendOTPButton;
-    private ProgressBar sendOTPProgressBar;
-
-    private String userEmail; // Variable to store the entered email
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_send_otp);
+        receiverEmail=(EditText)findViewById(R.id.emailEditText);
 
-        emailEditText = findViewById(R.id.emailEditText);
-        sendOTPButton = findViewById(R.id.sendOTPButton);
-        sendOTPProgressBar = findViewById(R.id.sendOTPProgressBar);
+        BtnSendEmail=(Button) findViewById(R.id.sendOTPButton);
 
-        sendOTPButton.setOnClickListener(new View.OnClickListener() {
+        BtnSendEmail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sendOTP();
+                firebaseAuth = FirebaseAuth.getInstance();
+
+                String receiver=receiverEmail.getText().toString();
+                isEmailRegistered(receiver);
+            }
+        });
+
+    }
+
+
+    private void sendResetPasswordEmail(String email) {
+
+
+        // Send a password reset email to the user
+        firebaseAuth.sendPasswordResetEmail(email)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        // Password reset email sent successfully
+                        AndroidUtil.showToast(getApplicationContext(), "Password reset email sent.");
+                        finish(); // Close the ResetPasswordActivity
+                    } else {
+                        // Password reset failed
+                        AndroidUtil.showToast(getApplicationContext(), "Failed to send password reset email.");
+                    }
+                });
+     }
+
+
+
+
+    private void sendEmail(final String Sender,final String Password,final String Receiver,final String Title,final String Message)
+    {
+
+        new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+                try {
+                    GMailSender sender = new GMailSender(Sender,Password);
+                    sender.sendMail(Title, "<b>"+Message+"</b>", Sender, Receiver);
+                    makeAlert();
+                    saveOTP(getApplicationContext(),generatedOTP);
+                    Intent intent = new Intent(getApplicationContext(),VerifyOTPActivity.class);
+                    intent.putExtra("USER_EMAIL_EXTRA",Receiver);
+                    startActivity(intent);
+
+                } catch (Exception e) {
+                    Log.e("SendMail", e.getMessage(), e);
+                }
+            }
+
+        }).start();
+    }
+    private void makeAlert(){
+        this.runOnUiThread(new Runnable() {
+            public void run() {
+                Toast.makeText(SendOTPActivity.this, "Mail Sent", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-    private void sendOTP() {
-        userEmail = emailEditText.getText().toString().trim();
-        String otp = OTPManager.generateOTP();
-        EmailSender.sendOTPEmail(userEmail,otp);
-        Log.d("sendOtpActivity","emailAdress"+userEmail + "     otp "+otp);
 
-        OTPManager.saveOTP(getApplicationContext(),otp);
-        // Once OTP is sent, proceed to the OTP verification activity
-        Intent intent = new Intent(SendOTPActivity.this, VerifyOTPActivity.class);
-        intent.putExtra("USER_EMAIL", userEmail);
-        startActivity(intent);
+    private void isEmailRegistered(String email) {
+        DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference("users");
+
+        usersRef.orderByChild("email").equalTo(email).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    // User with this email exists
+                    // Continue with sending OTP or show an error message
+                    String sender = "basic.erps@gmail.com";
+                    String senderPass = "xnymokcfghnhhmzv";
+                    String title = "Forgot Password OTP";
+
+                    generatedOTP = generateOTP();
+                    String message = "Your forgot password Otp is: " + generatedOTP;
+                    sendResetPasswordEmail(email);
+                } else {
+                    // No such user, show an error message
+                    Toast.makeText(SendOTPActivity.this, "User is not registered", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Toast.makeText(SendOTPActivity.this, "some error occurred", Toast.LENGTH_SHORT).show();
+
+            }
+        });
     }
+
+
 }

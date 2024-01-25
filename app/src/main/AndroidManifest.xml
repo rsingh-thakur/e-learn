@@ -6,10 +6,15 @@
         android:name="android.hardware.telephony"
         android:required="false" />
 
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_SMS" />
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
     <application
         android:allowBackup="true"
@@ -21,6 +26,50 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Elearning"
         tools:targetApi="31">
+
+        <activity
+            android:name=".PaymentActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PDFListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EditVideoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".FullScreenPlayerActivity"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+        <activity
+            android:name=".PlayerActivity"
+            android:exported="false" />
+        <activity
+            android:name=".VideoListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AllCousesActivty"
+            android:exported="false" />
+        <activity
+            android:name=".MyCoursesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".TestActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LiveClassesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".NotesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.home.UploadVideoActivity"
+            android:exported="false"
+            android:label="@string/title_activity_free_videos"
+            android:theme="@style/Theme.Elearning" />
+        <activity
+            android:name=".HomeActivity"
+            android:exported="false"
+            android:label="@string/title_activity_home"
+            android:theme="@style/Theme.Elearning.NoActionBar" />
         <activity
             android:name=".ResetPasswordActivity"
             android:exported="false" />
@@ -31,17 +80,12 @@
             android:name=".SendOTPActivity"
             android:exported="false" />
         <activity
-            android:name=".HomeActivity"
-            android:exported="false" />
-        <activity
             android:name=".LoginActivity"
             android:exported="false" />
         <activity
             android:name=".UserSignUpActivity"
             android:exported="false" />
-        <activity
-            android:name=".MainActivity"
-            android:exported="false" />
+
         <activity
             android:name=".SplashActivity"
             android:exported="true"
@@ -52,6 +96,34 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+
+        <meta-data
+            android:name="razorpay.api.key"
+            android:value="rzp_test_GYytSvAZkcc8c2" />
+
+        <activity
+            android:name="com.razorpay.CheckoutActivity"
+            android:configChanges="keyboard|keyboardHidden|screenSize|orientation"
+            android:exported="true"
+            android:theme="@style/CheckoutTheme"
+            tools:replace="android:configChanges">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <data android:host="rzp.io"
+                    android:scheme="io.rzp"/>
+            </intent-filter>
+        </activity>
+
+
+        <receiver android:name="com.razorpay.RzpTokenReceiver"
+            android:exported="false">
+
+          <intent-filter>
+              <action android:name="rzp.device_token.share"/>
+          </intent-filter>
+        </receiver>
+
     </application>
 
 </manifest>

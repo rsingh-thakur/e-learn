@@ -11,7 +11,7 @@
     <ImageView
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:background="@drawable/email_icon"
+        android:background="@drawable/emails_icon"
         android:backgroundTint="@color/my_primary"
         android:layout_marginBottom="20dp" />
 
@@ -40,7 +40,7 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Send OTP"
+        android:text="Send reset email"
         android:textColor="@color/white"
         android:layout_marginTop="20dp"
         android:id="@+id/sendOTPButton" />

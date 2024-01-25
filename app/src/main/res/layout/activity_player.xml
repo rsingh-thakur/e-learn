@@ -1,0 +1,67 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".PlayerActivity"
+    android:background="#333233"
+    android:orientation="vertical">
+
+    <com.google.android.exoplayer2.ui.StyledPlayerView
+        android:id="@+id/videoViews"
+        android:layout_width="wrap_content"
+        android:layout_height="240dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        app:show_buffering="when_playing" >
+
+
+        <ImageButton
+            android:id="@+id/back_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:background="@drawable/ic_back"
+            android:visibility="visible"></ImageButton>
+
+        <ImageButton
+            android:id="@+id/btnFullScreen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="345dp"
+            android:layout_marginTop="197dp"
+            android:background="@drawable/fullscreen"
+            android:visibility="visible" />
+
+
+    </com.google.android.exoplayer2.ui.StyledPlayerView>
+
+
+    <TextView
+        android:id="@+id/textViewPlayerTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="41dp"
+        android:textSize="18dp"
+
+        android:layout_below="@+id/videoViews"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="5dp"
+        android:textColor="@color/white"
+        android:text="Title"
+        android:padding="5dp" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnDownload"
+        android:layout_width="165dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textViewPlayerTitle"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="129dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="119dp"
+        android:text="Download" />
+
+</RelativeLayout>

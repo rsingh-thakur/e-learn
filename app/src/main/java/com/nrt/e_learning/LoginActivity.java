@@ -2,6 +2,7 @@ package com.nrt.e_learning;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -16,6 +17,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.nrt.e_learning.util.AndroidUtil;
 import com.nrt.e_learning.util.SharedPreferencesManager;
+
+import io.grpc.okhttp.internal.Platform;
 
 public class LoginActivity extends AppCompatActivity {
     private EditText loginUserId, loginPasswordId;
@@ -88,4 +91,5 @@ public class LoginActivity extends AppCompatActivity {
         Intent intent = new Intent(LoginActivity.this, SendOTPActivity.class);
         startActivity(intent);
     }
+
 }

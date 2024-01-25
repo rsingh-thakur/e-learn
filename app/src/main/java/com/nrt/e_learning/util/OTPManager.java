@@ -5,9 +5,9 @@ import java.util.Random;
 
 public class OTPManager {
 
-    private static final String OTP_PREFS_NAME = "OTP_PREFERENCES";
-    private static final String OTP_KEY = "OTP_VALUE";
-    private static final String TIMESTAMP_KEY = "TIMESTAMP";
+    public static final String OTP_PREFS_NAME = "OTP_PREFERENCES";
+    public static final String OTP_KEY = "OTP_VALUE";
+    public static final String TIMESTAMP_KEY = "TIMESTAMP";
 
     // Generate a random 6-digit OTP
     public static String generateOTP() {

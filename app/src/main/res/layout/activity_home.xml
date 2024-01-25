@@ -1,33 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
-    android:orientation="vertical"
-    tools:context=".HomeActivity">
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="HOME Screen "
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:textColor="@color/my_primary"
-        app:layout_constraintTop_toTopOf="parent"
-        android:textSize="40dp"
-        android:id="@+id/helloId"/>
-
-    <androidx.appcompat.widget.AppCompatButton
+    <include
+        android:id="@+id/app_bar_home"
+        layout="@layout/app_bar_home"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Log-out"
-        android:background="@color/my_primary"
-        android:textColor="@color/white"
-        android:layout_marginTop="20dp"
-        android:id="@+id/logOutButton"
-        android:onClick="logOutUser"/>
+        android:layout_height="match_parent" />
 
-</LinearLayout>
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="250dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        app:headerLayout="@layout/nav_header_home"
+        app:menu="@menu/activity_main_drawer" />
+
+</androidx.drawerlayout.widget.DrawerLayout>

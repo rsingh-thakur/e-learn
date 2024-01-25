@@ -1,0 +1,95 @@
+<!-- res/layout/activity_video_details.xml -->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EditVideoActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/my_primary"
+        android:title="Video Details"
+        android:titleTextColor="@android:color/white"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <!-- Display Video Thumbnail -->
+
+        <!-- Display Video Title -->
+
+        <!-- ... (other layout code) -->
+
+        <ImageView
+            android:id="@+id/ThumbnailImageView"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="73dp"
+            android:textAlignment="center"
+            android:src="@drawable/ic_video"
+            android:onClick="onThumbnailClick" />
+
+        <!-- ... (other layout code) -->
+
+
+        <EditText
+            android:id="@+id/editVideoTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ThumbnailImageView"
+            android:layout_marginTop="10dp"
+            android:text="Video Title"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+
+        <!-- Buttons for Actions -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/editVideoTitle"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp">
+
+            <!-- Button to Update Video Title -->
+            <Button
+                android:id="@+id/btnSave"
+                android:layout_width="2dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/my_primary"
+                android:text="Save Video"
+                android:layout_marginRight="30dp"
+                android:textColor="@android:color/white" />
+
+            <!-- Button to Delete Video -->
+            <Button
+                android:id="@+id/btnDeleteVideo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Delete Video"
+                android:background="@color/my_primary"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
+
+        <!-- Progress Bar for Update/Delete Operations -->
+        <ProgressBar
+            android:id="@+id/updateDeleteProgressBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ThumbnailImageView"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:visibility="gone" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

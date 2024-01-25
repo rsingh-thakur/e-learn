@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="15dp"
+    android:gravity="center_horizontal"
+    tools:context=".PaymentActivity">
+
+
+     <EditText
+         android:id="@+id/amountId"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:hint="Enter amount"
+         android:inputType="number"
+         android:layout_margin="20dp"
+         android:padding="15dp"
+         android:background="@drawable/rounded_bg"/>
+
+    <Button
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:text="Pay Now "
+        android:id="@+id/btnPayment"
+        android:textAlignment="center"/>
+
+</LinearLayout>
