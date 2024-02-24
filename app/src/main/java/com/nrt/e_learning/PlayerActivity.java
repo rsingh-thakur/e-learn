@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.net.Uri;
 
 import android.os.Environment;
+import android.util.Log;
 import android.view.View;
 
 import android.widget.ImageButton;
@@ -59,11 +60,12 @@ public class PlayerActivity extends AppCompatActivity {
         // Get the video URL from the intent
         videoUrl = getIntent().getStringExtra("videoUrl");
         fullScreenButton = findViewById(R.id.btnFullScreen);
+        Log.i("vidoeURL",videoUrl);
 
         styledPlayerView = findViewById(R.id.videoViews);
         textView = findViewById(R.id.textViewPlayerTitle);
         back_button = findViewById(R.id.back_button);
-        videoTitle  = getIntent().getStringExtra("videoTitle").trim();
+        videoTitle = getIntent().getStringExtra("videoTitle");
         textView.setText(videoTitle);
 
         initializePlayer();
@@ -122,6 +124,7 @@ public class PlayerActivity extends AppCompatActivity {
         styledPlayerView.setPlayer(exoPlayer);
         styledPlayerView.setResizeMode(AspectRatioFrameLayout.RESIZE_MODE_FIT);
         // Set media source
+        String youtubeVideoUrl = "https://www.youtube.com/watch?v=" + videoUrl;
         Uri videoUri = Uri.parse(videoUrl);
         MediaItem mediaItem = MediaItem.fromUri(videoUri);
         exoPlayer.setMediaItem(mediaItem);

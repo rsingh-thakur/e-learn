@@ -3,11 +3,12 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="my_primary">#6176FF</color>
-    <color name="my_secondary">#FFE74C</color>
+    <color name="my_primary">#255AFA</color>
+    <color name="my_secondary">#029DB8</color>
 
 
     <color name="off_white">#FAFAFA</color>
     <color name="light_gray">#C3C3C3</color>
     <color name="danger">#FD1313</color>
+    <color name="orange">#FF9800</color>
 </resources>

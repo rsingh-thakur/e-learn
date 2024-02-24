@@ -21,6 +21,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.nrt.e_learning.util.AndroidUtil;
+import com.nrt.e_learning.services.GMailSender;
 
 public class  SendOTPActivity extends AppCompatActivity {
 

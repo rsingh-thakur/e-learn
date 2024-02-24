@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -33,7 +34,6 @@ public class VideoListAdapter extends RecyclerView.Adapter<VideoListAdapter.Vide
     private OnItemClickListener onItemClickListener;
 
 
-    private int currentPlayingPosition = -1;
 
     public VideoListAdapter(List<VideoItem> videoItems, OnItemClickListener onItemClickListener, Context context) {
         this.videoItems = videoItems;
@@ -63,13 +63,19 @@ public class VideoListAdapter extends RecyclerView.Adapter<VideoListAdapter.Vide
         ImageView imageViewVideoThumbnail;
         TextView textViewVideoTitle;
 
-        ImageButton btnEdit;
-
+        ImageButton btnEdit,playButton;
+        WebView webViewImage;
         VideoViewHolder(@NonNull View itemView) {
             super(itemView);
 
             imageViewVideoThumbnail = itemView.findViewById(R.id.imageViewVideoThumbnail);
             textViewVideoTitle = itemView.findViewById(R.id.textViewVideoTitle);
+
+            playButton = itemView.findViewById(R.id.playButton);
+            playButton.setVisibility(View.GONE);
+            webViewImage = itemView.findViewById(R.id.webView);
+            webViewImage.setVisibility(View.GONE);
+
             btnEdit = itemView.findViewById(R.id.btnEdit);
             // Set click listener for the thumbnail
             imageViewVideoThumbnail.setOnClickListener(v -> {

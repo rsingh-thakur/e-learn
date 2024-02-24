@@ -4,7 +4,10 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Adapter;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -16,6 +19,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.nrt.e_learning.adapters.VideoListAdapter;
 import com.nrt.e_learning.model.VideoItem;
+import com.nrt.e_learning.util.AndroidUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,22 +31,38 @@ public class VideoListActivity extends AppCompatActivity  implements VideoListAd
     private RecyclerView recyclerViewVideos;
     private VideoListAdapter videoListAdapter;
 
+    private EditText searchVideoTitleText ;
+    private ImageButton video_search_btn;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video_list);
+        searchVideoTitleText = findViewById(R.id.search_bar);
+        video_search_btn = findViewById(R.id.video_search_btn);
+
 
         recyclerViewVideos = findViewById(R.id.recyclerViewVideos);
         recyclerViewVideos.setLayoutManager(new LinearLayoutManager(this)); // Use LinearLayoutManager or GridLayoutManager as needed
 
         firestore = FirebaseFirestore.getInstance();
         videoItemList = new ArrayList<>();
-       // videoItemList =   generateSampleVideoItems();
-        // Handle item click
+
         videoListAdapter = new VideoListAdapter(videoItemList, this, this);
         recyclerViewVideos.setAdapter(videoListAdapter);
+
         fetchVideosFromFirestore();
-//        videoListAdapter.notifyDataSetChanged();
+
+        video_search_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String searchedText = searchVideoTitleText.getText().toString().trim();
+                AndroidUtil.fetchVideosFromFirestoreBySearchText(getApplicationContext(),searchedText,firestore,videoItemList,videoListAdapter);
+                if(videoItemList.size()==0)
+                    AndroidUtil.showToast(getApplicationContext(),"No Result Found");
+            }
+        });
+
     }
 
 
@@ -84,13 +104,10 @@ public class VideoListActivity extends AppCompatActivity  implements VideoListAd
                         videoListAdapter.notifyDataSetChanged();
                     } else {
                         // Handle errors
-                        Toast.makeText(VideoListActivity.this, "Failed to fetch videos from Firestore", Toast.LENGTH_SHORT).show();
+                     AndroidUtil.showToast(getApplicationContext(),"Failed to fetch videos from Firestore");
                     }
                 });
-
-
-}
-
+    }
 
 
 
@@ -130,11 +147,15 @@ public class VideoListActivity extends AppCompatActivity  implements VideoListAd
             VideoItem videoItem = videoItemList.get(position);
 
             // Launch PlayerActivity with the video URL
-            Intent intent = new Intent(this, PlayerActivity.class);
+            Intent intent = new Intent(this,PlayerActivity.class);
             intent.putExtra("videoUrl", videoItem.getVideoUri().toString());
             intent.putExtra("videoTitle",videoItem.getVideoTitle());
             startActivity(intent);
         }
+    }
+
+    public void onBackButtonClicked(View view) {
+        finish();
     }
 }
 

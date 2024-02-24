@@ -1,13 +1,16 @@
-package com.nrt.e_learning.adapters;// PdfListAdapter.java
+package com.nrt.e_learning.adapters;
 
+import android.app.Activity;
 import android.app.DownloadManager;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Environment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,11 +26,17 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.nrt.e_learning.R;
 import com.nrt.e_learning.model.PdfItem;
+import com.razorpay.Checkout;
 
-public class PdfListAdapter extends RecyclerView.Adapter<PdfListAdapter.PdfViewHolder> {
+import org.json.JSONObject;
+
+public class PdfListAdapter extends RecyclerView.Adapter<PdfListAdapter.PdfViewHolder>  {
 
     private List<PdfItem> pdfItemList;
     private Context context;
+    private  Checkout checkout;
+
+    public PdfItem pdfToDownload;
 
     public PdfListAdapter(List<PdfItem> pdfItemList, Context context) {
         this.pdfItemList = pdfItemList;
@@ -38,7 +47,8 @@ public class PdfListAdapter extends RecyclerView.Adapter<PdfListAdapter.PdfViewH
     @Override
     public PdfViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_pdf, parent, false);
-        return new PdfViewHolder(view);
+        Checkout.preload(context);
+        return new PdfViewHolder(view,parent.getContext());
     }
 
     @Override
@@ -46,6 +56,13 @@ public class PdfListAdapter extends RecyclerView.Adapter<PdfListAdapter.PdfViewH
         PdfItem pdfItem = pdfItemList.get(position);
 
         holder.fileNameTextView.setText(pdfItem.getFileName());
+
+        String pdfPrice = pdfItem.getPrice();
+
+        if(pdfPrice=="")
+             holder.pdfPrice.setText("Free");
+        else
+            holder.pdfPrice.setText(pdfItem.getPrice()+"/-");
 
         // Load PDF image (you can customize this based on your requirements)
         Glide.with(context).load(R.drawable.pdf_image_icon).into(holder.bgImageView);
@@ -57,26 +74,47 @@ public class PdfListAdapter extends RecyclerView.Adapter<PdfListAdapter.PdfViewH
         holder.downloadImageView.setOnClickListener(v -> downloadPdf(pdfItem.getDownloadUrl(), pdfItem.getFileName()));
 
         holder.deleteImageView.setOnClickListener(v -> deletePdf(pdfItem));
+
+        holder.btnDownload.setOnClickListener(v -> downloadPdf(pdfItem.getDownloadUrl(), pdfItem.getFileName()));
+
     }
+
+    private void purchaseThenDownload(PdfItem pdfItem) {
+        if (pdfItem.getPrice() != null) {
+            pdfToDownload = pdfItem;
+           startPayment(pdfItem.getPrice().trim());
+        } else {
+            // PDF is free, allow direct download
+            downloadPdf(pdfItem.getDownloadUrl(), pdfItem.getFileName());
+        }
+    }
+
 
     @Override
     public int getItemCount() {
         return pdfItemList.size();
     }
 
+
+
     static class PdfViewHolder extends RecyclerView.ViewHolder {
         TextView fileNameTextView;
         ImageView bgImageView;
         ImageView downloadImageView;
-
+        TextView  pdfPrice;
         ImageView deleteImageView;
 
-        PdfViewHolder(@NonNull View itemView) {
+        Button btnDownload;
+
+
+        PdfViewHolder(@NonNull View itemView,Context context) {
             super(itemView);
             fileNameTextView = itemView.findViewById(R.id.txtPdfTitle);
             bgImageView = itemView.findViewById(R.id.bgimage);
             downloadImageView = itemView.findViewById(R.id.imgDownload);
             deleteImageView = itemView.findViewById(R.id.btnDeletePDF);
+            pdfPrice = itemView.findViewById(R.id.pdfPrice);
+            btnDownload = itemView.findViewById(R.id.btnPurchase_Dnld);
         }
     }
 
@@ -87,7 +125,7 @@ public class PdfListAdapter extends RecyclerView.Adapter<PdfListAdapter.PdfViewH
         context.startActivity(intent);
     }
 
-    private void downloadPdf(String pdfUrl, String fileName) {
+    public void downloadPdf(String pdfUrl, String fileName) {
         DownloadManager downloadManager = (DownloadManager) context.getSystemService(Context.DOWNLOAD_SERVICE);
         Uri uri = Uri.parse(pdfUrl);
 
@@ -144,6 +182,55 @@ public class PdfListAdapter extends RecyclerView.Adapter<PdfListAdapter.PdfViewH
                     Toast.makeText(context, "Failed to delete storage item", Toast.LENGTH_SHORT).show();
                 });
     }
+
+
+
+    public void startPayment(String price ) {
+
+       int amount = Math.round(Integer.parseInt(price)*100);
+        /**
+         * Instantiate Checkout
+         */
+        checkout = new Checkout();
+        checkout.setKeyID("rzp_test_GYytSvAZkcc8c2");
+        /**
+         * Set your logo here
+         */
+        checkout.setImage(R.drawable.e_learn);
+
+        /**
+         * Reference to current activity
+         */
+        final Activity activity = (Activity) context;
+
+        /**
+         * Pass your payment options to the Razorpay Checkout as a JSONObject
+         */
+        try {
+            JSONObject options = new JSONObject();
+
+            options.put("name", "E-Learn");
+            options.put("description", "Reference No. #123456");
+            options.put("image", "https://s3.amazonaws.com/rzp-mobile/images/rzp.jpg");
+            // options.put("order_id", "order_DBJOWzybf0sJbb");//from response of step 3.
+            options.put("theme.color", "#3399cc");
+            options.put("currency", "INR");
+            options.put("amount", amount);//pass amount in currency subunits
+            options.put("prefill.email", "elearn@gmail.com");
+            options.put("prefill.contact", "125785498");
+            JSONObject retryObj = new JSONObject();
+            retryObj.put("enabled", true);
+            retryObj.put("max_count", 3);
+            options.put("retry", retryObj);
+
+            checkout.open(activity, options);
+
+        } catch (Exception e) {
+            Log.e("payment", "Error in starting Razorpay Checkout", e);
+        }
+    }
+
+
 
 
 

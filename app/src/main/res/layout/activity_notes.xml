@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context=".NotesActivity">
-
+    tools:context=".UploadNotesActivity">
 
 
     <androidx.appcompat.widget.Toolbar
@@ -14,57 +14,89 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/my_primary"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:title="Upload Notes"
-        app:titleTextAppearance="@style/TextAppearance.AppCompat.SearchResult.Title"
-        android:titleTextColor="@android:color/white"/>
+        android:titleTextColor="@android:color/white"
+        app:titleTextAppearance="@style/TextAppearance.AppCompat.SearchResult.Title" />
 
-
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="15dp"
         android:layout_marginTop="50dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="15dp">
 
 
-    <EditText
-        android:id="@+id/editTextName"
+        <EditText
+            android:id="@+id/editTextName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/priceInput"
+            android:layout_marginBottom="22dp"
+            android:hint="Enter PDF Title"
+            android:inputType="text"
+            android:visibility="visible" />
+
+        <EditText
+            android:id="@+id/priceInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/spinnerCategory"
+            android:layout_marginBottom="27dp"
+            android:hint="Enter PDF price"
+            android:inputType="number"
+            android:visibility="visible" />
+
+        <Spinner
+            android:id="@+id/spinnerCategory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/btnChoosePDF"
+            android:layout_marginBottom="24dp"
+            android:autofillHints="name"
+            android:padding="10dp"
+            android:visibility="visible" />
+
+        <EditText
+            android:id="@+id/editTextCategory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:hint="Enter PDF Category"
+            android:inputType="text"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/btnChoosePDF"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/btnUpload"
+            android:layout_marginBottom="30dp"
+            android:onClick="choosePDF"
+            android:text="Choose PDF"
+            android:textColor="@color/white"
+            android:visibility="visible" />
+
+        <Button
+            android:id="@+id/btnUpload"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="409dp"
+            android:onClick="uploadPDF"
+            android:text="Upload PDF"
+            android:textColor="@color/white"
+            android:visibility="visible" />
+    </RelativeLayout>
+
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adViews3"
+        ads:adSize="BANNER"
+        ads:adUnitId="ca-app-pub-3940256099942544/6300978111"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:hint="Enter PDF Name"
-        android:visibility="visible"
-        android:inputType="text" />
-
-    <EditText
-        android:id="@+id/editTextCategory"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:visibility="visible"
-        android:hint="Enter PDF Category"
-        android:inputType="text" />
-
-
-    <Button
-        android:id="@+id/btnChoosePDF"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="choosePDF"
-        android:layout_marginBottom="10dp"
-        android:text="Choose PDF"
-        android:textColor="@color/white"
-        android:visibility="visible"
-     />
-
-    <Button
-        android:id="@+id/btnUpload"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="uploadPDF"
-        android:text="Upload PDF"
-        android:visibility="visible"
-        android:textColor="@color/white"/>
-    </LinearLayout>
-</LinearLayout>
+        android:layout_height="55dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true">
+    </com.google.android.gms.ads.AdView>
+</RelativeLayout>

@@ -4,22 +4,77 @@
     tools:showIn="navigation_view">
 
     <group android:checkableBehavior="single">
+
         <item
-            android:id="@+id/nav_home"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="@string/menu_home" />
+            android:title="@string/menu_home">
+        <menu>
+            <item
+                android:id="@+id/nav_home"
+                android:icon="@drawable/home_icon"
+                android:title="@string/menu_home" />
+            <item
+                android:id="@+id/nav_gallery"
+                android:icon="@drawable/playlist"
+                android:title="@string/menu_gallery" />
+            <item
+                android:id="@+id/nav_my_courses"
+                android:icon="@drawable/my_courses_icon"
+                android:title="My Courses" />
+            <item
+                android:id="@+id/nav_my_notes"
+                android:icon="@drawable/notebook_icon"
+                android:title="My Notes" />
+
+        </menu>
+
+        </item>
+
+    </group>
+
+    <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="@string/menu_gallery" />
-        <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="@string/menu_slideshow" />
-        <item
+            android:title="Profile">
+         <menu>
+         <item
             android:id="@+id/nav_profile"
             android:icon="@drawable/person_icon"
             android:title="Profile" />
-
+         <item
+            android:id="@+id/nav_logOut"
+            android:icon="@drawable/baseline_logout_24"
+            android:title="Logout"
+            android:onClick="logout"/>
+         </menu>
+        </item>
     </group>
+
+    <group android:checkableBehavior="single">
+        <item
+            android:title="Contact">
+            <menu>
+                <item
+                    android:id="@+id/nav_ask_query"
+                    android:icon="@drawable/whatsapp"
+                    android:title="Ask Query"
+                    android:onClick="openWhatsAppchat"/>
+                <item
+                    android:id="@+id/nav_social_media"
+                    android:icon="@drawable/web"
+                    android:title="Media Handles" />
+                <item
+                    android:id="@+id/shareApp"
+                    android:icon="@drawable/share_icon"
+                    android:title="Share"
+                    android:onClick="shareApp"/>
+                <item
+                    android:id="@+id/rateUs"
+                    android:icon="@drawable/rate_icon"
+                    android:title="Rate Us"
+                    android:onClick="onRateUsClick"/>
+
+            </menu>
+        </item>
+    </group>
+
+
 </menu>

@@ -1,7 +1,10 @@
 package com.nrt.e_learning.util;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+
+import com.nrt.e_learning.LoginActivity;
 
 public class SharedPreferencesManager {
     private static final String PREFERENCES_NAME = "MyAppPreferences";
@@ -44,11 +47,17 @@ public class SharedPreferencesManager {
     }
 
     public static void clearUserData(Context context) {
+
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
         SharedPreferences.Editor editor = preferences.edit();
         editor.remove(KEY_LOGGED_IN_USER);
         editor.remove(KEY_LOGIN_TIME);
         // Add other user data keys to remove if needed
         editor.apply();
+    }
+
+    public static void logOut(Context context){
+        SharedPreferencesManager.setLoggedInUser(context, false);
+        SharedPreferencesManager.setLoginTime(context, 0);
     }
 }

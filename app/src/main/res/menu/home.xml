@@ -2,8 +2,16 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/nav_logout"
         android:orderInCategory="100"
         android:title="@string/action_settings"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/nav_nask_query"
+        android:title="Ask Chat GPT"
+        android:onClick="AskChatGPT"/>
+    <item
+        android:id="@+id/DarkMode"
+        android:title="Dark Mode"
+        android:onClick="DarkModeLightMode"/>
 </menu>

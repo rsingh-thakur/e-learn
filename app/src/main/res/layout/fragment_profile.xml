@@ -1,64 +1,208 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="10dp"
     android:padding="16dp">
+
+    <ImageView
+        android:id="@+id/profilePhotoImageView"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/circular_bg"
+        android:padding="3dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/profile_icon" />
+
+    <TextView
+        android:id="@+id/overlayTextImage"
+        android:layout_width="161dp"
+        android:layout_height="37dp"
+        android:layout_alignStart="@+id/profilePhotoImageView"
+        android:layout_alignEnd="@+id/profilePhotoImageView"
+        android:layout_alignBottom="@+id/profilePhotoImageView"
+        android:layout_marginStart="2dp"
+        android:layout_marginEnd="-13dp"
+        android:layout_marginBottom="145dp"
+        android:text="Tab Profile To Change"
+        android:textColor="@android:color/black" />
+
+    <TextView
+        android:id="@+id/profileText"
+        android:layout_width="152dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/profilePhotoImageView"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="118dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="105dp"
+        android:text="  Profile picture"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <ProgressBar
+        android:id="@+id/progressBarProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/profileText"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="154dp"
+        android:layout_marginTop="45dp"
+        android:layout_marginEnd="137dp"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/usernameLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Username:"
+        android:layout_below="@+id/profileText"
+        android:layout_marginTop="15dp"
+        android:text="Name :"
         android:textSize="18sp"
-        android:textStyle="bold"/>
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/usernameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/usernameLabel"
+        android:layout_below="@+id/usernameLabel"
+        android:layout_marginTop="6dp"
+        android:text="name goes here... "
         android:textColor="@color/black"
-        android:layout_marginTop="8dp"
-        android:text=""
-        android:textSize="16sp"/>
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/emailLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/usernameTextView"
+        android:layout_below="@+id/usernameTextView"
         android:layout_marginTop="16dp"
-        android:text="Email:"
+        android:text="Email :"
         android:textSize="18sp"
-        android:textStyle="bold"/>
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/emailTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/emailLabel"
-        android:layout_marginTop="8dp"
-        android:text=""
+        android:layout_marginTop="1dp"
+        android:text="Email address goes here ..."
         android:textColor="@color/black"
-        android:textSize="16sp"/>
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/phoneNumberLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/emailTextView"
-        android:layout_marginTop="16dp"
-        android:text="Phone Number:"
+        android:layout_below="@+id/emailTextView"
+        android:layout_marginTop="13dp"
+        android:text="Phone no :"
         android:textSize="18sp"
 
-        android:textStyle="bold"/>
+        android:textStyle="bold" />
+
 
     <TextView
         android:id="@+id/phoneNumberTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/phoneNumberLabel"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="6dp"
+        android:text="phone number is goes here..."
         android:textColor="@color/black"
-        android:text=""
-        android:textSize="16sp"/>
+        android:textSize="16sp" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/editProfileButton"
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:text="Edit Profile" />
+
+
+    <EditText
+        android:id="@+id/usernameEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/usernameLabel"
+        android:layout_marginStart="31dp"
+        android:layout_marginTop="-32dp"
+        android:layout_toEndOf="@+id/usernameLabel"
+        android:hint="Enter your name"
+        android:inputType="text"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:visibility="gone" />
+
+    <EditText
+        android:id="@+id/emailEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/emailLabel"
+        android:layout_marginStart="33dp"
+        android:layout_marginTop="-32dp"
+        android:layout_toEndOf="@+id/emailLabel"
+        android:hint="Enter your email"
+        android:inputType="textEmailAddress"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:visibility="gone" />
+
+    <EditText
+        android:id="@+id/phoneNumberEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/phoneNumberLabel"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="-31dp"
+        android:layout_toEndOf="@+id/phoneNumberLabel"
+        android:hint="Enter your phone number"
+        android:inputType="phone"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:visibility="gone" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/logOutButton"
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="39dp"
+        android:layout_toStartOf="@+id/editProfileButton"
+        android:text="Log Out" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/saveInfoButton"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="109dp"
+        android:layout_marginEnd="106dp"
+        android:layout_marginBottom="256dp"
+        android:text="Save Info"
+        android:textColor="@color/black"
+        android:visibility="gone" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/saveProfileButton"
+        android:layout_width="126dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/profilePhotoImageView"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="131dp"
+        android:layout_marginTop="29dp"
+        android:layout_marginEnd="118dp"
+        android:background="@drawable/button_bg"
+        android:text="Save"
+        android:visibility="gone" />
 </RelativeLayout>

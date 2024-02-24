@@ -8,6 +8,10 @@ public class VideoItem {
     private String videoTitle;
     private Uri thumbnailUri;
 
+    private String description;
+
+    private String CategoryName;
+
     public VideoItem() {
     }
 
@@ -36,7 +40,23 @@ public class VideoItem {
         this.videoTitle = videoTitle;
     }
 
-    public VideoItem(Uri videoUri, String videoTitle,Uri thumbnailUri) {
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getCategoryName() {
+        return CategoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        CategoryName = categoryName;
+    }
+
+    public VideoItem(Uri videoUri, String videoTitle, Uri thumbnailUri) {
         this.videoUri = videoUri;
         this.videoTitle = videoTitle;
         this.thumbnailUri = thumbnailUri;

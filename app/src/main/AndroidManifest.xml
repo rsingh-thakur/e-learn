@@ -26,10 +26,51 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Elearning"
         tools:targetApi="31">
+        <activity
+            android:name=".Course_Video_List_Activity"
+            android:exported="false" />
+        <activity
+            android:name=".CourseActivity"
+            android:exported="false" />
+        <activity
+            android:name=".shortUpload"
+            android:exported="false" />
+        <activity
+            android:name=".shortVideo"
+            android:exported="false" />
+        <activity
+            android:name=".ResultActivity"
+            android:exported="false" />
+        <activity
+            android:name=".quiz.QuizHomeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".quiz.QuestionActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ChatGPTSupport"
+            android:exported="false" />
+        <activity
+            android:name=".VideoView"
+            android:exported="false" />
+        <activity
+            android:name=".YoutubePlayer"
+            android:exported="false" />
+        <activity
+            android:name=".Youtube_player_activity"
+            android:exported="false" />
+
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-4147400122496681~4628637380" />
 
         <activity
-            android:name=".PaymentActivity"
+            android:name=".NotesListByCateActivity"
             android:exported="false" />
+        <activity
+            android:name=".NotesSetActivity"
+            android:exported="false" />
+
         <activity
             android:name=".PDFListActivity"
             android:exported="false" />
@@ -46,22 +87,16 @@
             android:name=".VideoListActivity"
             android:exported="false" />
         <activity
-            android:name=".AllCousesActivty"
-            android:exported="false" />
-        <activity
-            android:name=".MyCoursesActivity"
-            android:exported="false" />
-        <activity
             android:name=".TestActivity"
             android:exported="false" />
         <activity
             android:name=".LiveClassesActivity"
             android:exported="false" />
         <activity
-            android:name=".NotesActivity"
+            android:name=".UploadNotesActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.home.UploadVideoActivity"
+            android:name=".UploadVideoActivity"
             android:exported="false"
             android:label="@string/title_activity_free_videos"
             android:theme="@style/Theme.Elearning" />
@@ -85,7 +120,6 @@
         <activity
             android:name=".UserSignUpActivity"
             android:exported="false" />
-
         <activity
             android:name=".SplashActivity"
             android:exported="true"
@@ -96,7 +130,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
 
         <meta-data
             android:name="razorpay.api.key"
@@ -109,21 +142,39 @@
             android:theme="@style/CheckoutTheme"
             tools:replace="android:configChanges">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <data android:host="rzp.io"
-                    android:scheme="io.rzp"/>
+                <action android:name="android.intent.action.MAIN" />
+
+                <data
+                    android:host="rzp.io"
+                    android:scheme="io.rzp" />
             </intent-filter>
         </activity>
 
-
-        <receiver android:name="com.razorpay.RzpTokenReceiver"
+        <service
+            android:name=".services.FCMMessagingService"
             android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
 
-          <intent-filter>
-              <action android:name="rzp.device_token.share"/>
-          </intent-filter>
+        <receiver
+            android:name="com.razorpay.RzpTokenReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="rzp.device_token.share" />
+            </intent-filter>
         </receiver>
 
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
     </application>
 
 </manifest>

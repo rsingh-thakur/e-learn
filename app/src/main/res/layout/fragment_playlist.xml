@@ -1,0 +1,59 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.playlist.PlaylistFragment">
+
+
+    <GridLayout
+        android:id="@+id/gridLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:columnCount="1"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        android:rowCount="3">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/Playlist_button"
+            android:layout_width="0dp"
+            android:layout_height="55sp"
+            android:layout_columnWeight="1"
+            android:layout_marginBottom="10sp"
+            android:background="@drawable/button_bg"
+            android:text="Playlist 1" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/Playlist_button2"
+            android:layout_width="0dp"
+            android:layout_height="55sp"
+            android:layout_columnWeight="1"
+            android:layout_marginBottom="10sp"
+            android:background="@drawable/button_bg"
+            android:text="Playlist 2" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/Playlist_button3"
+            android:layout_width="0dp"
+            android:layout_height="55sp"
+            android:layout_columnWeight="1"
+            android:layout_marginBottom="10sp"
+            android:background="@drawable/button_bg"
+            android:text="Playlist 3" />
+
+    </GridLayout>
+
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adView"
+        ads:adSize="BANNER"
+        ads:adUnitId="ca-app-pub-3940256099942544/6300978111"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"/>
+</RelativeLayout>
