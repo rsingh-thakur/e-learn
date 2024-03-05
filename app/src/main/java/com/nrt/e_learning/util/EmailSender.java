@@ -10,7 +10,7 @@ public class EmailSender {
 
     // Your email credentials and SMTP server information
     private static final String EMAIL_USERNAME = "basic.erps@gmail.com";
-    private static final String EMAIL_PASSWORD = "xnymokcfghnhhmzv";
+    private static final String EMAIL_PASSWORD = "Your_app_password";
     private static final String SMTP_HOST = "smtp.gmail.com";
     private static final int SMTP_PORT = 587;
 
